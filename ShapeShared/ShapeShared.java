@@ -5,7 +5,6 @@ public class ShapeShared {
     
     public final String keyJsonShapeQuad = "QUAD";
     public final String keyJsonShapeEllipse = "ELLIPSE";
-    public final String keyJsonShape = keyJsonShapeEllipse;
     public final String[] keyJsonShapeOptions = {keyJsonShapeQuad, keyJsonShapeEllipse};
     
     

@@ -12,6 +12,9 @@ final String keyJsonSizeY = "sizeY";
 final String keyJsonColourR = "colourR";
 final String keyJsonColourG = "colourG";
 final String keyJsonColourB = "colourB";
+final String keyJsonShapeQuad = "QUAD";
+final String keyJsonShapeEllipse = "ELLIPSE";
+final String keyJsonShape = "ELLIPSE";
 final int screenBg = 255;
 
 void setup() {
@@ -21,6 +24,9 @@ void setup() {
   netServer = new Server(this, 5204);
   clientMacAddresses = new ArrayList<String>();
   clientDataObjects = new ArrayList<JSONObject>();
+  
+  rectMode(CENTER);
+  ellipseMode(CENTER);
 }
 
 void draw() {
@@ -71,8 +77,22 @@ void drawClientData(){
   {
     JSONObject clientJSON = clientDataObjects.get(i);
     
-    color clientColour = color(clientJSON.getInt(keyJsonColourR), clientJSON.getInt(keyJsonColourG), clientJSON.getInt(keyJsonColourB));
-    fill(clientColour);
-    ellipse(clientJSON.getInt(keyJsonMouseX), clientJSON.getInt(keyJsonMouseY), clientJSON.getInt(keyJsonSizeX), clientJSON.getInt(keyJsonSizeY));
+    drawShape(clientJSON);
+  }
+}
+
+void drawShape(JSONObject sourceData) {
+  String sourceDataShape;
+  sourceDataShape = sourceData.getString(keyJsonShape);
+  
+  color clientColour = color(sourceData.getInt(keyJsonColourR), sourceData.getInt(keyJsonColourG), sourceData.getInt(keyJsonColourB));
+  fill(clientColour);
+
+  if(sourceDataShape.equals(keyJsonShapeQuad)){
+     rect(sourceData.getInt(keyJsonMouseX), sourceData.getInt(keyJsonMouseY), sourceData.getInt(keyJsonSizeX), sourceData.getInt(keyJsonSizeY));
+  } else if(sourceDataShape.equals(keyJsonShapeEllipse)){
+     ellipse(sourceData.getInt(keyJsonMouseX), sourceData.getInt(keyJsonMouseY), sourceData.getInt(keyJsonSizeX), sourceData.getInt(keyJsonSizeY));
+  } else {
+    ellipse(sourceData.getInt(keyJsonMouseX), sourceData.getInt(keyJsonMouseY), 10, 10);
   }
 }

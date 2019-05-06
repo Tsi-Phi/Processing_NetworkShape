@@ -105,9 +105,9 @@ void drawShape(JSONObject sourceData) {
   color clientColour = color(sourceData.getInt(shapeShared.keyJsonColourR), sourceData.getInt(shapeShared.keyJsonColourG), sourceData.getInt(shapeShared.keyJsonColourB));
   fill(clientColour);
 
-  if(sourceDataShape == shapeShared.keyJsonShapeQuad){
+  if(sourceDataShape.equals(shapeShared.keyJsonShapeQuad)){
      rect(sourceData.getInt(shapeShared.keyJsonMouseX), sourceData.getInt(shapeShared.keyJsonMouseY), sourceData.getInt(shapeShared.keyJsonSizeX), sourceData.getInt(shapeShared.keyJsonSizeY));
-  } else if(sourceDataShape == shapeShared.keyJsonShapeEllipse){
+  } else if(sourceDataShape.equals(shapeShared.keyJsonShapeEllipse)){
      ellipse(sourceData.getInt(shapeShared.keyJsonMouseX), sourceData.getInt(shapeShared.keyJsonMouseY), sourceData.getInt(shapeShared.keyJsonSizeX), sourceData.getInt(shapeShared.keyJsonSizeY));
   } else {
     ellipse(sourceData.getInt(shapeShared.keyJsonMouseX), sourceData.getInt(shapeShared.keyJsonMouseY), 10, 10);
